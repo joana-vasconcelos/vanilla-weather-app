@@ -26,23 +26,31 @@
     <div class="container">
       <div class="frame">
         <div class="search-form">
-        <form id="search-city-form">
-          <input
-            type="search"
-            placeholder="Enter city here"
-            class="search-city"
-            id="city-input"
+          <form id="search-city-form">
+            <input
+              type="search"
+              placeholder="Enter city here"
+              class="search-city"
+              id="city-input"
+            />
+            <input type="submit" value="Search" class="search-button" />
+          </form>
+          <img
+            src="images/pin.png"
+            alt=""
+            class="location-pin"
+            id="location-pin"
           />
-          <input type="submit" value="Search" class="search-button" />
-        </form>
-        <img src="images/pin.png" alt="" class="location-pin" id="location-pin">
-</div>
+        </div>
         <ul class="currently">
           <li>
             <h2 class="city" id="city"></h2>
           </li>
           <li class="country" id="country"></li>
-          <li class="units"> <a href="#" id="celsius"> <strong> °C </strong></a>  | <a href="#" id="fahrenheit">°F</a> </li>
+          <li class="units">
+            <a href="#" id="celsius"> <strong> °C </strong></a> |
+            <a href="#" id="fahrenheit">°F</a>
+          </li>
         </ul>
 
         <div class="row">
@@ -52,23 +60,27 @@
 
           <div class="col-4 current-day">
             <div class="current-day-text">
-              <h1 class="temperature"> <span id="temperature" type="number">22</span>°</h1>
+              <h1 class="temperature">
+                <span id="temperature" type="number">22</span>°
+              </h1>
               <p class="day-hour">
                 <span id="day-month"></span>
                 <br />
-                <span id="hour-minute">  </span>
+                <span id="hour-minute"> </span>
               </p>
               <p class="temperature max-min">
                 <img src="images/max-temp.png" alt="" width="30px" />
-                <span id="max-current-temp"><strong></strong></span> <strong>°</strong> 
-                <img src="images/min-temp.png" alt="" width="30px" /> <span id="min-current-temp"></span>°
+                <span id="max-current-temp"><strong></strong></span>
+                <strong>°</strong>
+                <img src="images/min-temp.png" alt="" width="30px" />
+                <span id="min-current-temp"></span>°
               </p>
             </div>
           </div>
           <div class="col-3 current-characteristics">
             <p>
-              <span id="current-sky"></span> 
-              <br>
+              <span id="current-sky"></span>
+              <br />
               Feels like <span id="feels-like"></span>°
               <br />
               Humidity <span id="humidity"></span>%
@@ -123,6 +135,15 @@
             <img src="images/rainy-sun.png" alt="" class="weather-img" />
           </div>
         </div>
+      </div>
+      <div class="footer">
+        <a
+          href="https://github.com/joanavjc/vanilla-weather-app"
+          target="
+       _blank"
+          >Open-source code</a
+        >
+        by Joana Vasconcelos
       </div>
     </div>
 

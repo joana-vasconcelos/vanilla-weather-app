@@ -5,7 +5,7 @@ body {
 }
 
 .frame {
-  margin: 50px auto;
+  margin: 50px auto 10px;
   max-width: 745px;
   min-width: 745px;
   padding-top: 10px;
@@ -23,7 +23,7 @@ body {
 
 form {
   text-align: center;
-  margin:10px;
+  margin: 10px;
   display: inline;
 }
 
@@ -42,7 +42,7 @@ form {
   border: 2px solid #0c5e7e;
 }
 
-.location-pin{
+.location-pin {
   width: 25px;
   display: inline;
 }
@@ -50,7 +50,6 @@ form {
 .location-pin:hover {
   cursor: pointer;
 }
-
 
 .currently {
   margin-bottom: 0;
@@ -158,4 +157,15 @@ li {
 .weather-img {
   width: 40px;
   margin-bottom: 10px;
+}
+
+.footer {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2px;
+  width: 200px;
+  border-radius: 3px;
 }
