@@ -11,8 +11,9 @@ function showWeatherConditions(response) {
   document.querySelector("#min-current-temp").innerHTML =
     Math.round(minTemperature);
   document.querySelector("#country").innerHTML = response.data.sys.country;
+  feelsLikeTemperature = response.data.main.feels_like;
   document.querySelector("#feels-like").innerHTML = Math.round(
-    response.data.main.feels_like
+    feelsLikeTemperature
   );
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(
@@ -40,16 +41,16 @@ function searchCity(city) {
 function submitCity(event) {
   event.preventDefault();
   let city = document.querySelector("#city-input").value;
-   fahrenheit.classList.remove("active");
-   celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
+  celsius.classList.add("active");
   searchCity(city);
 }
 
 function showPosition(position) {
   let lat = position.coords.latitude;
   let long = position.coords.longitude;
-   fahrenheit.classList.remove("active");
-   celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
+  celsius.classList.add("active");
   let units = "metric";
   let apiKey = "0d9bd7b9270c9eee20fc452755853c0d";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=${units}`;
@@ -68,6 +69,8 @@ searchForm.addEventListener("submit", submitCity);
 
 let currentLocation = document.querySelector("#location-pin");
 currentLocation.addEventListener("click", changeToCurrentLocation);
+
+// Display date and time
 
 function showDate(date) {
   let weekDays = [
@@ -128,14 +131,21 @@ function changeToFahrenheit(event) {
   fahrenheit.classList.add("active");
   let temperature = document.querySelector("#temperature");
   let fahrenheitTemperature = celsiusTemperature * (9 / 5) + 32;
-  let minFahrenheit = minTemperature * (9 / 5) + 32;
   temperature.innerHTML = Math.round(fahrenheitTemperature);
+
+  let minFahrenheit = minTemperature * (9 / 5) + 32;
   document.querySelector("#min-current-temp").innerHTML =
     Math.round(minFahrenheit);
+
   let maxFahrenheit = maxTemperature * (9 / 5) + 32;
   document.querySelector("#max-current-temp").innerHTML = `<strong>${Math.round(
     maxFahrenheit
   )} </strong>`;
+
+   let feelsLikeFahrenheit = feelsLikeTemperature * (9 / 5) + 32;
+   document.querySelector("#feels-like").innerHTML =
+     Math.round(feelsLikeFahrenheit);
+
 }
 
 function changeToCelsius(event) {
@@ -144,11 +154,16 @@ function changeToCelsius(event) {
   celsius.classList.add("active");
   let temperature = document.querySelector("#temperature");
   temperature.innerHTML = Math.round(celsiusTemperature);
+
   document.querySelector("#min-current-temp").innerHTML =
     Math.round(minTemperature);
+
   document.querySelector("#max-current-temp").innerHTML = `<strong>${Math.round(
     maxTemperature
   )} </strong>`;
+
+  document.querySelector("#feels-like").innerHTML =
+    Math.round(feelsLikeTemperature);
 }
 
 let fahrenheit = document.querySelector("#fahrenheit");
@@ -160,3 +175,4 @@ celsius.addEventListener("click", changeToCelsius);
 let celsiusTemperature = null;
 let maxTemperature = null;
 let minTemperature = null;
+let feelsLikeTemperature = null;
