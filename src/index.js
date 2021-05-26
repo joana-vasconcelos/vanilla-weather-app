@@ -1,14 +1,15 @@
 function showWeatherConditions(response) {
   document.querySelector("#city").innerHTML = response.data.name;
-  document.querySelector("#temperature").innerHTML = Math.round(
-    response.data.main.temp
-  );
+  celsiusTemperature = response.data.main.temp;
+  document.querySelector("#temperature").innerHTML =
+    Math.round(celsiusTemperature);
+  maxTemperature = response.data.main.temp_max;
   document.querySelector("#max-current-temp").innerHTML = `<strong>${Math.round(
-    response.data.main.temp_max
+    maxTemperature
   )} </strong>`;
-  document.querySelector("#min-current-temp").innerHTML = Math.round(
-    response.data.main.temp_min
-  );
+  minTemperature = response.data.main.temp_min;
+  document.querySelector("#min-current-temp").innerHTML =
+    Math.round(minTemperature);
   document.querySelector("#country").innerHTML = response.data.sys.country;
   document.querySelector("#feels-like").innerHTML = Math.round(
     response.data.main.feels_like
@@ -115,23 +116,43 @@ function showTime(time) {
 let hourMinutes = document.querySelector("#hour-minute");
 hourMinutes.innerHTML = showTime(currentDate);
 
+// Temperature conversions
+
 function changeToFahrenheit(event) {
   event.preventDefault();
-  fahrenheit.innerHTML = "<strong>°F</strong>";
-  celsius.innerHTML = "°C";
-  let fahrenheitTemperature = document.querySelector("#temperature");
-  fahrenheitTemperature.innerHTML = "72";
+  celsius.classList.remove("active");
+  fahrenheit.classList.add("active");
+  let temperature = document.querySelector("#temperature");
+  let fahrenheitTemperature = celsiusTemperature * (9 / 5) + 32;
+  let minFahrenheit = minTemperature * (9 / 5) + 32;
+  temperature.innerHTML = Math.round(fahrenheitTemperature);
+  document.querySelector("#min-current-temp").innerHTML =
+    Math.round(minFahrenheit);
+  let maxFahrenheit = maxTemperature * (9 / 5) + 32;
+  document.querySelector("#max-current-temp").innerHTML = `<strong>${Math.round(
+    maxFahrenheit
+  )} </strong>`;
 }
 
 function changeToCelsius(event) {
   event.preventDefault();
-  celsius.innerHTML = "<strong>°C</strong>";
-  fahrenheit.innerHTML = "°F";
-  let celsiusTemperature = document.querySelector("#temperature");
-  celsiusTemperature.innerHTML = "22";
+  fahrenheit.classList.remove("active");
+  celsius.classList.add("active");
+  let temperature = document.querySelector("#temperature");
+  temperature.innerHTML = Math.round(celsiusTemperature);
+  document.querySelector("#min-current-temp").innerHTML =
+    Math.round(minTemperature);
+  document.querySelector("#max-current-temp").innerHTML = `<strong>${Math.round(
+    maxTemperature
+  )} </strong>`;
 }
-let celsius = document.querySelector("#celsius");
-let fahrenheit = document.querySelector("#fahrenheit");
 
+let fahrenheit = document.querySelector("#fahrenheit");
 fahrenheit.addEventListener("click", changeToFahrenheit);
+
+let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", changeToCelsius);
+
+let celsiusTemperature = null;
+let maxTemperature = null;
+let minTemperature = null;

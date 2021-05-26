@@ -85,8 +85,15 @@ li {
 
 #celsius,
 #fahrenheit {
-  text-decoration: none;
   color: #0c5e7e;
+  text-decoration: none;
+  
+}
+
+.active {
+  color: #0c5e7e;
+  font-weight: bold;
+  cursor: default ;
 }
 
 #current-sky {
