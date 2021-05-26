@@ -40,12 +40,16 @@ function searchCity(city) {
 function submitCity(event) {
   event.preventDefault();
   let city = document.querySelector("#city-input").value;
+   fahrenheit.classList.remove("active");
+   celsius.classList.add("active");
   searchCity(city);
 }
 
 function showPosition(position) {
   let lat = position.coords.latitude;
   let long = position.coords.longitude;
+   fahrenheit.classList.remove("active");
+   celsius.classList.add("active");
   let units = "metric";
   let apiKey = "0d9bd7b9270c9eee20fc452755853c0d";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=${units}`;
