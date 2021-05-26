@@ -12,9 +12,8 @@ function showWeatherConditions(response) {
     Math.round(minTemperature);
   document.querySelector("#country").innerHTML = response.data.sys.country;
   feelsLikeTemperature = response.data.main.feels_like;
-  document.querySelector("#feels-like").innerHTML = Math.round(
-    feelsLikeTemperature
-  );
+  document.querySelector("#feels-like").innerHTML =
+    Math.round(feelsLikeTemperature);
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed * (18 / 5)
@@ -25,7 +24,7 @@ function showWeatherConditions(response) {
   let iconElement = document.querySelector("#weather-icon");
   iconElement.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    `images/${response.data.weather[0].icon}.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
@@ -142,10 +141,9 @@ function changeToFahrenheit(event) {
     maxFahrenheit
   )} </strong>`;
 
-   let feelsLikeFahrenheit = feelsLikeTemperature * (9 / 5) + 32;
-   document.querySelector("#feels-like").innerHTML =
-     Math.round(feelsLikeFahrenheit);
-
+  let feelsLikeFahrenheit = feelsLikeTemperature * (9 / 5) + 32;
+  document.querySelector("#feels-like").innerHTML =
+    Math.round(feelsLikeFahrenheit);
 }
 
 function changeToCelsius(event) {
