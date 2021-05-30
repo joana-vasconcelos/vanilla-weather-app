@@ -1,3 +1,41 @@
+// Display weekly forecast
+
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#week-forecast");
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let forecastHTML = "";
+
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      ` <div class="day-forecast">
+            <p class="day-temp">${day}</p>
+            <p class="temperature"><strong> 20°</strong> | 13°</p>
+            <img src="images/02d.png" alt="" class="weather-img" />
+          </div> `;
+  });
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiKey = "0d9bd7b9270c9eee20fc452755853c0d";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
+
+// Display current weather conditions
+
 function showWeatherConditions(response) {
   document.querySelector("#city").innerHTML = response.data.name;
   celsiusTemperature = response.data.main.temp;
@@ -27,6 +65,8 @@ function showWeatherConditions(response) {
     `images/${response.data.weather[0].icon}.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  getForecast(response.data.coord);
 }
 
 function searchCity(city) {
@@ -61,35 +101,7 @@ function changeToCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
-function displayForecast() {
-  let forecastElement = document.querySelector("#week-forecast");
-
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  let forecastHTML = "";
-
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      ` <div class="day-forecast">
-            <p class="day-temp">${day}</p>
-            <p class="temperature"><strong> 20°</strong> | 13°</p>
-            <img src="images/02d.png" alt="" class="weather-img" />
-          </div> `;
-  });
-
-  forecastElement.innerHTML = forecastHTML;
-}
-
 searchCity("Lisbon");
-displayForecast();
 
 let searchForm = document.querySelector("#search-city-form");
 searchForm.addEventListener("submit", submitCity);
