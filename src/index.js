@@ -61,7 +61,35 @@ function changeToCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#week-forecast");
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let forecastHTML = "";
+
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      ` <div class="day-forecast">
+            <p class="day-temp">${day}</p>
+            <p class="temperature"><strong> 20°</strong> | 13°</p>
+            <img src="images/02d.png" alt="" class="weather-img" />
+          </div> `;
+  });
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
 searchCity("Lisbon");
+displayForecast();
 
 let searchForm = document.querySelector("#search-city-form");
 searchForm.addEventListener("submit", submitCity);
