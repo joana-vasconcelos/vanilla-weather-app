@@ -23,13 +23,16 @@ function displayForecast(response) {
   let forecastHTML = "";
   forecast.forEach(function (forecastDay, index) {
     if (index > 0) {
+      let minForecast = forecastDay.temp.min;
       forecastHTML =
         forecastHTML +
         ` <div class="day-forecast">
             <p class="day-temp">${formatDay(forecastDay.dt)}</p>
-            <p class="temperature"><strong> ${Math.round(
+            <p class="temperature"> <strong> ${Math.round(
               forecastDay.temp.max
-            )}°</strong> | ${Math.round(forecastDay.temp.min)}°</p>
+            )}°</strong> | ${Math.round(
+          forecastDay.temp.min
+        )}°</p>
             <img src="images/${
               forecastDay.weather[0].icon
             }.png" alt="" class="weather-img" />
