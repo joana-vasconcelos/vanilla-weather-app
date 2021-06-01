@@ -1,8 +1,8 @@
 // Display weekly forecast
 
-function displayForecast(response) {
-  let forecastElement = document.querySelector("#week-forecast");
-
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
   let days = [
     "Sunday",
     "Monday",
@@ -12,16 +12,29 @@ function displayForecast(response) {
     "Friday",
     "Saturday",
   ];
-  let forecastHTML = "";
 
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      ` <div class="day-forecast">
-            <p class="day-temp">${day}</p>
-            <p class="temperature"><strong> 20°</strong> | 13°</p>
-            <img src="images/02d.png" alt="" class="weather-img" />
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#week-forecast");
+  let forecast = response.data.daily;
+
+  let forecastHTML = "";
+  forecast.forEach(function (forecastDay, index) {
+    if (index > 0) {
+      forecastHTML =
+        forecastHTML +
+        ` <div class="day-forecast">
+            <p class="day-temp">${formatDay(forecastDay.dt)}</p>
+            <p class="temperature"><strong> ${Math.round(
+              forecastDay.temp.max
+            )}°</strong> | ${Math.round(forecastDay.temp.min)}°</p>
+            <img src="images/${
+              forecastDay.weather[0].icon
+            }.png" alt="" class="weather-img" />
           </div> `;
+    }
   });
 
   forecastElement.innerHTML = forecastHTML;
