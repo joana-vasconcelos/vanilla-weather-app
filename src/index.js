@@ -23,16 +23,15 @@ function displayForecast(response) {
   let forecastHTML = "";
   forecast.forEach(function (forecastDay, index) {
     if (index > 0) {
-      let minForecast = forecastDay.temp.min;
       forecastHTML =
         forecastHTML +
         ` <div class="day-forecast">
             <p class="day-temp">${formatDay(forecastDay.dt)}</p>
-            <p class="temperature"> <strong> ${Math.round(
+            <p class="temperature"> <strong> <span id="max-forecast">${Math.round(
               forecastDay.temp.max
-            )}°</strong> | ${Math.round(
+            )}</span>°</strong> | <span id="min-forecast">${Math.round(
           forecastDay.temp.min
-        )}°</p>
+        )} </span>°</p>
             <img src="images/${
               forecastDay.weather[0].icon
             }.png" alt="" class="weather-img" />
@@ -200,6 +199,18 @@ function changeToFahrenheit(event) {
   let feelsLikeFahrenheit = feelsLikeTemperature * (9 / 5) + 32;
   document.querySelector("#feels-like").innerHTML =
     Math.round(feelsLikeFahrenheit);
+
+  let forecastMax = document.querySelectorAll("#max-forecast");
+  forecastMax.forEach(function (forecast) {
+    let currentTemp = forecast.innerHTML;
+    forecast.innerHTML = Math.round(currentTemp * (9 / 5) + 32);
+  });
+
+  let forecastMin = document.querySelectorAll("#min-forecast");
+  forecastMin.forEach(function (forecast) {
+    let currentTemp = forecast.innerHTML;
+    forecast.innerHTML = Math.round(currentTemp * (9 / 5) + 32);
+  });
 }
 
 function changeToCelsius(event) {
@@ -218,6 +229,18 @@ function changeToCelsius(event) {
 
   document.querySelector("#feels-like").innerHTML =
     Math.round(feelsLikeTemperature);
+
+  let forecastMax = document.querySelectorAll("#max-forecast");
+  forecastMax.forEach(function (forecast) {
+    let currentTemp = forecast.innerHTML;
+    forecast.innerHTML = Math.round((currentTemp - 32) * (5 / 9));
+  });
+
+  let forecastMin = document.querySelectorAll("#min-forecast");
+  forecastMin.forEach(function (forecast) {
+    let currentTemp = forecast.innerHTML;
+    forecast.innerHTML = Math.round((currentTemp - 32) * (5 / 9));
+  });
 }
 
 let fahrenheit = document.querySelector("#fahrenheit");
